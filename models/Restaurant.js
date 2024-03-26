@@ -5,6 +5,8 @@ const restaurantSchema = new mongoose.Schema({
   location: { type: String, required: true },
   description: { type: String, required: true },
   tag: { type: String, required: true },
+  menu: { type: String, required: true },
+  number: { type: Number, required: true },
   image: { type: String },
 });
 

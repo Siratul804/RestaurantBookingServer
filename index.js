@@ -22,6 +22,7 @@ app.use(cors());
 //routes
 app.use("/api", require("./routes/test"));
 app.use("/api/restaurant", require("./routes/restaurant"));
+app.use("/api/booking", require("./routes/booking"));
 
 
 //mongodb_connect
@@ -42,4 +43,3 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-
