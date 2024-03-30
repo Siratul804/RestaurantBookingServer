@@ -7,6 +7,7 @@ const restaurantSchema = new mongoose.Schema({
   tag: { type: String, required: true },
   menu: { type: String, required: true },
   number: { type: Number, required: true },
+  price: { type: Number, required: true },
   image: { type: String },
 });
 

@@ -2,10 +2,10 @@ const Restaurant = require("../models/Restaurant");
 
 exports.postRestaurant = async (req, res) => {
   try {
-    const { name, location, description, tag, image } = req.body;
+    const { name, location, description, tag, image, price } = req.body;
 
     // Input validation - ensure required fields are present
-    if (!name || !location || !description || !tag || !image) {
+    if (!name || !location || !description || !tag || !image || !price) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
@@ -15,7 +15,8 @@ exports.postRestaurant = async (req, res) => {
       location,
       description,
       tag,
-      image
+      image,
+      price
     });
 
     // Save the new restaurant to the database
