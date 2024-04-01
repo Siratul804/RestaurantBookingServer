@@ -34,3 +34,17 @@ exports.getRestaurant = async (req, res) => {
     res.status(500).send(err);
   }
 };
+
+exports.getOneRestaurant = async (req,res) => {
+  try {
+    const restaurantId = req.params.id;
+    const restaurant = await Restaurant.findById(restaurantId);
+    if (!restaurant) {
+      return res.status(404).json({ message: 'restaurant not found' });
+    }
+    res.json(restaurant);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
