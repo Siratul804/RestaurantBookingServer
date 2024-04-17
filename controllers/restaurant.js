@@ -26,6 +26,48 @@ exports.postRestaurant = async (req, res) => {
 };
 
 
+
+exports.editRestaurant = async (req, res) => {
+  try {
+    const { name, location, description, tag, menu, number, image, price } = req.body;
+
+    // Input validation - ensure required fields are present
+    if (!name || !location || !description || !tag || !menu || !number || !image || !price) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    // Check if the request contains an 'id' parameter
+    if (req.params.id) {
+      // If 'id' is present, update existing restaurant data
+      const updatedRestaurant = await Restaurant.findByIdAndUpdate(req.params.id, {
+        name, location, description, tag, menu, number, image, price
+      }, { new: true });
+
+      if (!updatedRestaurant) {
+        return res.status(404).json({ message: "Restaurant not found" });
+      }
+
+      return res.json({ message: "Restaurant updated successfully", restaurant: updatedRestaurant });
+    } else {
+      // If 'id' is not present, create a new restaurant
+      const newRestaurant = new Restaurant({
+        name, location, description, tag, menu, number, image, price
+      });
+
+      // Save the new restaurant to the database
+      await newRestaurant.save();
+
+      return res.json({ message: "Restaurant added successfully", restaurant: newRestaurant });
+    }
+  } catch (err) {
+    // Handle any errors gracefully
+    console.error("Error adding/updating restaurant:", err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
+
 exports.getRestaurant = async (req, res) => {
   try {
     const result = await Restaurant.find({});
