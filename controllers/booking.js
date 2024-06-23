@@ -2,16 +2,16 @@ const Booking = require("../models/Booking");
 
 exports.postBooking = async (req, res) => {
   try {
-    const { name, date, time, number, seat } = req.body;
+    const { id, name, date, time, number, seat } = req.body;
 
     // Input validation - ensure required fields are present
-    if (!name || !date || !time || !number || !seat) {
+    if ( !id || !name || !date || !time || !number || !seat) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
     // Create a new Restaurant object
     const newRestaurant = new Booking({
-        name, date, time, number, seat
+        id, name, date, time, number, seat
     });
 
     // Save the new restaurant to the database
