@@ -16,15 +16,15 @@ const upload = multer({ storage: storage });
 
 // Create a new post
 exports.createFlora = [
-  upload.single("image"),
+  // upload.single("image"),
   async (req, res) => {
     try {
       const { prompt, tags, mark } = req.body;
-      const image = req.file.path;
+      const image = "img.jpg";
 
       const newFlora = new Flora({
         prompt,
-        tags: tags.split(","),
+        tags,
         image,
         mark,
       });
